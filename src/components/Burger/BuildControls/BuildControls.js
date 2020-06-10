@@ -11,10 +11,15 @@ const controls = [
 ]
 
 const buildControls = props => {
-    const transformedControls = controls.map((control, index) => <BuildControl key={control.type} label={control.label} />)
+    const transformedControls = controls.map((control, index) => <BuildControl key={control.type}
+                                                                                label={control.label}
+                                                                                add={() => props.ingredientAdded(control.type)}
+                                                                                remove={() => props.ingredientRemoved(control.type)}
+                                                                                disabled={props.disabled[control.type]} />)
 
     return (
         <div className={classes.BuildControls}>
+            <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
             {transformedControls}
         </div>
     );
